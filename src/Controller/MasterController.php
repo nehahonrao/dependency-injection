@@ -27,9 +27,10 @@ class MasterController extends AbstractController
         $message=" ";
         $request=Request::createFromGlobals();
         if($request->isMethod("POST")){
-            if($request->request->get("message")){
-                var_dump($request->request->get("message"));
-                $message=$request->request->get("message");
+            // var_dump($request->request);
+            if($request->request->get("name")){
+                // var_dump($request->request->get("message"));
+                $message=$request->request->get("name");
                 $letter=$request->request->get("letter");
                 if($letter==='cap'){
                     $master=new Master($capital,$log);
