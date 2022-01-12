@@ -13,7 +13,12 @@ use App\Service\Logger;
 
 class MasterController extends AbstractController
 {
-    #[Route('/master', name: 'master')]
+    /**
+     * @Route("/master", name="master")
+     * @param Request $request
+
+     * @return Response
+     */
     public function index(Request $request): Response
     {
         $capital= new Capital();
@@ -23,17 +28,19 @@ class MasterController extends AbstractController
         $request=Request::createFromGlobals();
         if($request->isMethod("POST")){
             if($request->request->get("message")){
+                var_dump($request->request->get("message"));
                 $message=$request->request->get("message");
                 $letter=$request->request->get("letter");
                 if($letter==='cap'){
                     $master=new Master($capital,$log);
-                    $message=$master->Transform($message);
+                    $message=$master->transform($message);
+                    $master->logger($message);
 
                 }
                    elseif($letter==='dash'){
                     $master=new Master($dash,$log);
-                    $message= $master->Transform($message);
-                    
+                    $message= $master->transform($message);
+                    $master->logger($message);
                 }
             }
 

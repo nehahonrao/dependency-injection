@@ -8,17 +8,18 @@ use App\Service\Logger;
 class Master{
  private Transform $transform;
  private Logger $logger;
+ private string $message;
 
 public function __construct( Transform $transform,Logger $logger){
         $this->transform=$transform;
         $this->logger=$logger;
 }
-public function Transform(string $message){
+public function transform(string $message):string{
     return $this->transform->transform($message);
 
 }
-public function Logger(){
-     $this->logger->log($this->message);
+public function logger($message){
+     $this->logger->log($message);
 
 }
 /**
@@ -26,7 +27,7 @@ public function Logger(){
      */
 
      public function setMessage(string $message){
-         $this->message=$message;
+         $this->message= $message;
 }
 
 }
